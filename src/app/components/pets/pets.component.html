@@ -1,0 +1,15 @@
+<div class="container">
+
+    <h2>Pets</h2>
+
+    <ul>
+        <li *ngFor="let pet of pets" class="pet">
+            <a [routerLink]="['/pet', pet._id]">
+                <img src="{{url+'get-image/'+pet.image}}" *ngIf='pet.image' />
+                <h3>{{pet.name}}</h3>
+                <p>{{pet.animal}}</p>
+            </a>
+        </li>
+    </ul>
+ 
+</div>

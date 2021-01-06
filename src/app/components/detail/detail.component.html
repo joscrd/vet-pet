@@ -1,0 +1,28 @@
+<div class="container" *ngIf="pet"> 
+
+    <div class="image"  *ngIf='pet.image'>
+        <img src="{{url+'get-image/'+pet.image}}" />
+    </div>
+
+    <div class="data">
+        <h1>{{ pet.name }}</h1>
+        <h3>{{ pet.animal }}</h3>
+        <p>{{ pet.age }}</p>
+        <p>{{ pet.gender }}</p>
+        <p>{{ pet.diagnostic }}</p>
+        <p>{{ pet.prescription }}</p>
+        <p>{{ pet.date }}</p>
+
+        <p *ngIf="confirm == false">
+            <a [routerLink]="['/update-pet', pet._id]" class="button-update">Update</a>
+            <a (click)="setConfirm(true)" class="button-delete">Delete</a>
+        </p>
+
+        <p *ngIf="confirm == true">
+            <span class="confirm">Confirm to remove this pet<br/></span>
+            <a (click)="setConfirm(false)" class="button-update">Cancel</a>
+            <a (click)="deletePet(pet._id)" class="button-delete">Delete</a>
+        </p>
+    </div>
+
+</div>

@@ -1,0 +1,81 @@
+<!-- This section contains the forms to create a new pet in the database -->
+<div class="container" *ngIf="pet">
+    <h2>{{ title }}</h2>
+
+    <!-- Created/not messages-->
+    <div class="message success" *ngIf="status=='success'">
+        The pet has been stored succesfully. 
+        <a [routerLink]="['/pet', save_pet._id]">See the pet</a>
+    </div>
+
+    <div class="message failed" *ngIf="status=='failed'">
+        The pet hasn't been stored.
+    </div>
+
+    <!-- Forms -->
+    <form #petForm="ngForm" (ngSubmit)="onSubmit(petForm)">
+        <p>
+            <label for="name">Name  </label>
+            <input type="text" name="name" #name="ngModel" [(ngModel)]="pet.name" required />
+
+            <span class="form_error" *ngIf="name.touched && !name.valid">
+                Name is obligatory.
+            </span>
+        </p>
+
+        <p>
+            <label for="age">Age  </label>
+            <input type="text" name="age" #age="ngModel" [(ngModel)]="pet.age" required />
+
+            <span class="form_error" *ngIf="age.touched && !age.valid">
+                Age is obligatory.
+            </span>
+        </p>
+
+        <p>
+            <label for="animal">Animal  </label>
+            <input type="text" name="animal" #animal="ngModel" [(ngModel)]="pet.animal" required />
+
+            <span class="form_error" *ngIf="animal.touched && !animal.valid">
+                Animal is obligatory.
+            </span>
+        </p>
+
+        <p>
+            <label for="gender">Gender  </label>
+            <input type="text" name="gender" #gender="ngModel" [(ngModel)]="pet.gender" required />
+
+            <span class="form_error" *ngIf="gender.touched && !gender.valid">
+                Gender is obligatory.
+            </span>
+        </p>
+
+        <p>
+            <label for="diagnostic">Diagnostic  </label>
+            <textarea name="diagnostic" #diagnostic="ngModel" [(ngModel)]="pet.diagnostic" ></textarea>
+        </p>
+
+        <p>
+            <label for="prescription">Prescription  </label>
+            <textarea name="prescription" #prescription="ngModel" [(ngModel)]="pet.prescription" ></textarea>
+        </p>
+
+        <p>
+            <label for="date">Date  </label>
+            <input type="date" name="date" #date="ngModel" [(ngModel)]="pet.date" />
+        </p>
+
+        <p>
+            <label for="image">Image  </label>
+
+            <span class="image"  *ngIf='pet.image' style="float:none">
+                <img src="{{url+'get-image/'+pet.image}}" style="width:100px" />
+            </span><br/>
+
+            <input type="file" name="image" placeholder="upload image" (change)="fileChangeEvent($event)" />
+        </p>
+        
+        <input type="submit" value="send" [disabled]="!petForm.form.valid" />
+        <!--<input type="button" value="new" id="new" [disabled]="btnDisabled" (click)="refresh()" action="">-->
+    </form>
+</div>
